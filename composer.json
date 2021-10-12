@@ -1,16 +1,16 @@
 {
-    "name": ":vendor_slug/:package_slug",
-    "description": ":package_description",
+    "name": "kavinsky/tacview-acmi-reader",
+    "description": "A PHP8 TacView ACMI file format reader",
     "keywords": [
-        ":vendor_name",
-        ":package_slug"
+        "kavinsky",
+        "tacview-acmi-reader"
     ],
-    "homepage": "https://github.com/:vendor_slug/:package_slug",
+    "homepage": "https://github.com/kavinsky/tacview-acmi-reader",
     "license": "MIT",
     "authors": [
         {
-            "name": ":author_name",
-            "email": "author@domain.com",
+            "name": "Ignacio Munoz Fernandez",
+            "email": "nmunozfernandez@gmail.com",
             "role": "Developer"
         }
     ],
@@ -25,12 +25,12 @@
     },
     "autoload": {
         "psr-4": {
-            "VendorName\\Skeleton\\": "src"
+            "Kavinsky\\TacviewAcmiReader\\": "src"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "VendorName\\Skeleton\\Tests\\": "tests"
+            "Kavinsky\\TacviewAcmiReader\\Tests\\": "tests"
         }
     },
     "scripts": {

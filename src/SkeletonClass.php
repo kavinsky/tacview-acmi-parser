@@ -1,7 +1,7 @@
 <?php
 
-namespace VendorName\Skeleton;
+namespace Kavinsky\TacviewAcmiReader;
 
-class SkeletonClass
+class TacviewAcmiReaderClass
 {
 }
