@@ -6,10 +6,13 @@ use Illuminate\Support\Collection;
 
 class AcmiObject
 {
-    public Collection $transformationLog;
+    public Collection $log;
+
+    public AcmiPropertyBag $properties;
 
     public function __construct()
     {
-        $this->transformationLog = collect();
+        $this->log = collect();
+        $this->properties = new AcmiPropertyBag();
     }
 }
