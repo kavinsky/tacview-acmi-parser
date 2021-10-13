@@ -2,7 +2,6 @@
 
 namespace Kavinsky\TacviewAcmiReader;
 
-
 class AcmiLogRecord
 {
     /**
@@ -72,7 +71,6 @@ class AcmiLogRecord
         ?float $heading = null,
         ?AcmiPropertyBag $propertyBag = null
     ) {
-
         $this->longitude = $lon;
         $this->latitude = $lat;
         $this->altitude = $alt;

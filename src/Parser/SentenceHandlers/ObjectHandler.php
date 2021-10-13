@@ -56,15 +56,15 @@ class ObjectHandler implements SentenceHandlerInterface
         };
 
         $object->log->push(new AcmiLogRecord(
-            lon: $lon        ? (float) $lon : null,
-            lat: $lat        ? (float) $lat : null,
-            alt: $alt        ? (float) $alt : null,
-            roll: $roll       ? (float) $roll : null,
-            pitch: $pitch      ? (float) $pitch : null,
-            yaw: $yaw        ? (float) $yaw : null,
-            u: $u          ? (float) $u : null,
-            v: $v          ? (float) $v : null,
-            heading: $heading    ? (float) $heading : null,
+            lon: $lon ? (float) $lon : null,
+            lat: $lat ? (float) $lat : null,
+            alt: $alt ? (float) $alt : null,
+            roll: $roll ? (float) $roll : null,
+            pitch: $pitch ? (float) $pitch : null,
+            yaw: $yaw ? (float) $yaw : null,
+            u: $u ? (float) $u : null,
+            v: $v ? (float) $v : null,
+            heading: $heading ? (float) $heading : null,
             propertyBag: new AcmiPropertyBag($this->parseProperties($object, $payload))
         ));
     }
