@@ -1,6 +1,6 @@
 <?php
 
-namespace Kavinsky\TacviewAcmiParser\Parser\SentenceHandlers;
+namespace Kavinsky\TacviewAcmiParser\Parser\Handlers;
 
 use Kavinsky\TacviewAcmiParser\Acmi;
 

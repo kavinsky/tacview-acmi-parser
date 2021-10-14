@@ -3,8 +3,8 @@
 namespace Kavinsky\TacviewAcmiParser\Parser;
 
 use Kavinsky\TacviewAcmiParser\Acmi;
+use Kavinsky\TacviewAcmiParser\Parser\Handlers\SentenceHandlerInterface;
 use Kavinsky\TacviewAcmiParser\Parser\Reader\AcmiReaderInterface;
-use Kavinsky\TacviewAcmiParser\Parser\SentenceHandlers\SentenceHandlerInterface;
 
 class AcmiParser
 {

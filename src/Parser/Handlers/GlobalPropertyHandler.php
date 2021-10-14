@@ -1,11 +1,12 @@
 <?php
 
-namespace Kavinsky\TacviewAcmiParser\Parser\SentenceHandlers;
+namespace Kavinsky\TacviewAcmiParser\Parser\Handlers;
 
 use Carbon\Carbon;
 use Carbon\Exceptions\InvalidFormatException;
 use Illuminate\Support\Str;
 use Kavinsky\TacviewAcmiParser\Acmi;
+use Kavinsky\TacviewAcmiParser\Enum\AcmiDateFormat;
 
 class GlobalPropertyHandler implements SentenceHandlerInterface
 {
@@ -86,12 +87,7 @@ class GlobalPropertyHandler implements SentenceHandlerInterface
      */
     private function makeDate(string $value): ?Carbon
     {
-        $formats = [
-            'Y-m-d\TH:i:s.u\Z',
-            'Y-m-d\TH:i:s\Z',
-        ];
-
-        foreach ($formats as $format) {
+        foreach (AcmiDateFormat::all() as $format) {
             try {
                 $date = Carbon::createFromFormat(
                     $format,

@@ -1,6 +1,6 @@
 <?php
 
-namespace Kavinsky\TacviewAcmiParser\Parser\SentenceHandlers;
+namespace Kavinsky\TacviewAcmiParser\Parser\Handlers;
 
 use Kavinsky\TacviewAcmiParser\Acmi;
 use Kavinsky\TacviewAcmiParser\AcmiLogRecord;
@@ -40,6 +40,12 @@ class ObjectHandler implements SentenceHandlerInterface
         $acmi->objects[$hexId] = $object;
     }
 
+    /**
+     * Parses the rest of the sentence getting the payload properties
+     *
+     * @param  array<string>  $payload
+     * @return array<string,mixed>
+     */
     protected function parseProperties(array $payload): array
     {
         $bag = [];
@@ -51,6 +57,13 @@ class ObjectHandler implements SentenceHandlerInterface
         return $bag;
     }
 
+    /**
+     * Parses the first part of the sentence, transformation vector and payload
+     *
+     * @param  AcmiObject  $object
+     * @param  string  $transformString
+     * @param  array<string>  $payload
+     */
     protected function parseTransformation(AcmiObject $object, string $transformString, array $payload = []): void
     {
         $rawTransform = explode('|', $transformString);
@@ -79,6 +92,13 @@ class ObjectHandler implements SentenceHandlerInterface
         ));
     }
 
+    /**
+     * Access to the object collection and if it exists returns it, if not creates it
+     *
+     * @param  Acmi  $acmi
+     * @param  string  $id
+     * @return AcmiObject
+     */
     protected function getOrCreateObject(Acmi $acmi, string $id): AcmiObject
     {
         if ($acmi->objects->has($id)) {

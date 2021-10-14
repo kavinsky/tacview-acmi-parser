@@ -102,7 +102,7 @@ class AcmiGlobalProperties
     public function getPlusDelta(float|int $delta = 0): Carbon
     {
         return $this->referenceTime->clone()->addMicroseconds(
-            (int) $delta * 1000
+            (int) ($delta * 1000)
         );
     }
 }

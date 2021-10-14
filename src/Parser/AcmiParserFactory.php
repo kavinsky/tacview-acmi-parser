@@ -3,14 +3,14 @@
 namespace Kavinsky\TacviewAcmiParser\Parser;
 
 use Kavinsky\TacviewAcmiParser\Acmi;
+use Kavinsky\TacviewAcmiParser\Parser\Handlers\EventHandler;
+use Kavinsky\TacviewAcmiParser\Parser\Handlers\FileHeadersHandler;
+use Kavinsky\TacviewAcmiParser\Parser\Handlers\GlobalPropertyHandler;
+use Kavinsky\TacviewAcmiParser\Parser\Handlers\ObjectHandler;
+use Kavinsky\TacviewAcmiParser\Parser\Handlers\SentenceHandlerInterface;
 use Kavinsky\TacviewAcmiParser\Parser\Reader\AcmiReaderInterface;
 use Kavinsky\TacviewAcmiParser\Parser\Reader\AcmiTextReader;
 use Kavinsky\TacviewAcmiParser\Parser\Reader\AcmiZipReader;
-use Kavinsky\TacviewAcmiParser\Parser\SentenceHandlers\EventHandler;
-use Kavinsky\TacviewAcmiParser\Parser\SentenceHandlers\FileHeadersHandler;
-use Kavinsky\TacviewAcmiParser\Parser\SentenceHandlers\GlobalPropertyHandler;
-use Kavinsky\TacviewAcmiParser\Parser\SentenceHandlers\ObjectHandler;
-use Kavinsky\TacviewAcmiParser\Parser\SentenceHandlers\SentenceHandlerInterface;
 
 class AcmiParserFactory
 {
