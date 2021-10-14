@@ -2,8 +2,8 @@
 
 namespace Kavinsky\TacviewAcmiReader\Parser\Reader;
 
-use ZipArchive;
 use Kavinsky\TacviewAcmiReader\Parser\Reader\Exceptions\AccessErrorException;
+use ZipArchive;
 
 class AcmiZipReader extends AbstractStreamReader
 {
