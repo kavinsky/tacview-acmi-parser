@@ -40,9 +40,15 @@ class ObjectHandler implements SentenceHandlerInterface
         $acmi->objects[$hexId] = $object;
     }
 
-    protected function parseProperties(AcmiObject $object, array $payload): array
+    protected function parseProperties(array $payload): array
     {
-        return explode('=', $payload);
+        $bag = [];
+        foreach ($payload as $item) {
+            [$key, $value] = explode('=', $item);
+            $bag[$key] = $value;
+        }
+
+        return $bag;
     }
 
     protected function parseTransformation(AcmiObject $object, string $transformString, array $payload = []): void
@@ -55,17 +61,21 @@ class ObjectHandler implements SentenceHandlerInterface
             9 => [$lon, $lat, $alt, $roll, $pitch, $yaw, $u, $v, $heading] = $rawTransform
         };
 
+        $propertyBag = new AcmiPropertyBag($this->parseProperties($payload));
+
+        $object->properties->merge($propertyBag);
+
         $object->log->push(new AcmiLogRecord(
             lon: $lon ? (float) $lon : null,
             lat: $lat ? (float) $lat : null,
             alt: $alt ? (float) $alt : null,
-            roll: $roll ? (float) $roll : null,
-            pitch: $pitch ? (float) $pitch : null,
-            yaw: $yaw ? (float) $yaw : null,
-            u: $u ? (float) $u : null,
-            v: $v ? (float) $v : null,
-            heading: $heading ? (float) $heading : null,
-            propertyBag: new AcmiPropertyBag($this->parseProperties($object, $payload))
+            roll: isset($roll) ? (float) $roll : null,
+            pitch: isset($pitch) ? (float) $pitch : null,
+            yaw: isset($yaw) ? (float) $yaw : null,
+            u: isset($u) ? (float) $u : null,
+            v: isset($v) ? (float) $v : null,
+            heading: isset($heading) ? (float) $heading : null,
+            propertyBag: $propertyBag
         ));
     }
 

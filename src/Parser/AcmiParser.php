@@ -8,7 +8,7 @@ use Kavinsky\TacviewAcmiReader\Parser\SentenceHandlers\FileHeadersHandler;
 use Kavinsky\TacviewAcmiReader\Parser\SentenceHandlers\GlobalPropertyHandler;
 use Kavinsky\TacviewAcmiReader\Parser\SentenceHandlers\ObjectHandler;
 use Kavinsky\TacviewAcmiReader\Parser\SentenceHandlers\SentenceHandlerInterface;
-use Kavinsky\TacviewAcmiReader\Readers\AcmiReaderInterface;
+use Kavinsky\TacviewAcmiReader\Reader\AcmiReaderInterface;
 
 class AcmiParser
 {

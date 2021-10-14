@@ -4,8 +4,8 @@ namespace Kavinsky\TacviewAcmiReader;
 
 use Carbon\Carbon;
 use Illuminate\Support\Collection;
-use Kavinsky\TacviewAcmiReader\Concerns\AcmiEventsConcern;
-use Kavinsky\TacviewAcmiReader\Concerns\AcmiGlobalPropertiesConcern;
+use Kavinsky\TacviewAcmiReader\Concern\AcmiEventsConcern;
+use Kavinsky\TacviewAcmiReader\Concern\AcmiGlobalPropertiesConcern;
 
 /**
  * The ACMI Report Object

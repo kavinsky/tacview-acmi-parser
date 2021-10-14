@@ -1,6 +1,6 @@
 <?php
 
-namespace Kavinsky\TacviewAcmiReader\Concerns;
+namespace Kavinsky\TacviewAcmiReader\Concern;
 
 use Carbon\Carbon;
 

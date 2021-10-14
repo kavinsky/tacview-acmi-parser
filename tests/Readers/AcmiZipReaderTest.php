@@ -1,12 +1,14 @@
 <?php
 
-use Kavinsky\TacviewAcmiReader\Reader\AcmiTextReader;
+use Kavinsky\TacviewAcmiReader\Reader\AcmiZipReader;
 use Kavinsky\TacviewAcmiReader\Reader\Exceptions\AccessErrorException;
 
 it('can read complete sentence with split lines', function () {
-    $acmiTxtPath = test_resource_path('line-join-test.txt.acmi');
+    $acmiTxtPath = test_resource_path('line-join-test.zip.acmi');
 
-    $reader = new AcmiTextReader();
+    file_get_contents($acmiTxtPath);
+
+    $reader = new AcmiZipReader();
     $reader->start($acmiTxtPath);
 
     $reader->nextSentence();
@@ -15,9 +17,9 @@ it('can read complete sentence with split lines', function () {
 });
 
 it('can multiple lines', function () {
-    $acmiTxtPath = test_resource_path('simple-acmi.txt.acmi');
+    $acmiTxtPath = test_resource_path('simple-acmi.zip.acmi');
 
-    $reader = new AcmiTextReader();
+    $reader = new AcmiZipReader();
     $reader->start($acmiTxtPath);
 
     expect($reader->nextSentence())->toBe("FileType=text/acmi/tacview");
@@ -28,14 +30,14 @@ it('can multiple lines', function () {
 it('cant load invalid file path', function () {
     $acmiTxtPath = test_resource_path('simple-acmi.txt.acmi2');
 
-    $reader = new AcmiTextReader();
+    $reader = new AcmiZipReader();
     $reader->start($acmiTxtPath);
 })->throws(AccessErrorException::class);
 
 it('cant pass from eof', function () {
-    $acmiTxtPath = test_resource_path('line-join-test.txt.acmi');
+    $acmiTxtPath = test_resource_path('line-join-test.zip.acmi');
 
-    $reader = new AcmiTextReader();
+    $reader = new AcmiZipReader();
     $reader->start($acmiTxtPath);
 
     $reader->nextSentence();

@@ -35,4 +35,11 @@ class AcmiPropertyBag
     {
         return $this->bag->get($propertyKey, $default);
     }
+
+    public function merge(self $otherBag): self
+    {
+        $this->bag = $this->bag->merge($otherBag);
+
+        return $this;
+    }
 }

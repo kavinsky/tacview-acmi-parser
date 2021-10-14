@@ -2,7 +2,7 @@
 
 use Kavinsky\TacviewAcmiReader\Acmi;
 use Kavinsky\TacviewAcmiReader\Parser\AcmiParser;
-use Kavinsky\TacviewAcmiReader\Readers\AcmiTextReader;
+use Kavinsky\TacviewAcmiReader\Reader\AcmiTextReader;
 
 it('test parser', function () {
     $acmiTxtPath = test_resource_path('simple-acmi.txt.acmi');
@@ -21,5 +21,5 @@ it('test parser', function () {
     expect($acmi->referenceTime)->toBeInstanceOf(\DateTimeInterface::class)->not->toBeNull();
     expect($acmi->recordingTime)->toBeInstanceOf(\DateTimeInterface::class)->not->toBeNull();
 
-    dump($acmi->objects->count());
+    dump($acmi->objects->first()->properties);
 });

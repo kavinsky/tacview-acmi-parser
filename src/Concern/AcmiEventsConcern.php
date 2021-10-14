@@ -1,6 +1,6 @@
 <?php
 
-namespace Kavinsky\TacviewAcmiReader\Concerns;
+namespace Kavinsky\TacviewAcmiReader\Concern;
 
 use Illuminate\Support\Collection;
 use Kavinsky\TacviewAcmiReader\AcmiEvent;

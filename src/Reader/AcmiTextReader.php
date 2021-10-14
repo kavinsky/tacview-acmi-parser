@@ -1,6 +1,6 @@
 <?php
 
-namespace Kavinsky\TacviewAcmiReader\Readers;
+namespace Kavinsky\TacviewAcmiReader\Reader;
 
 class AcmiTextReader extends AbstractFileReader
 {
