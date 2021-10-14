@@ -2,13 +2,14 @@
 
 use Kavinsky\TacviewAcmiReader\Acmi;
 use Kavinsky\TacviewAcmiReader\Parser\AcmiParser;
-use Kavinsky\TacviewAcmiReader\Reader\AcmiTextReader;
+use Kavinsky\TacviewAcmiReader\Parser\AcmiParserFactory;
+use Kavinsky\TacviewAcmiReader\Parser\Reader\AcmiTextReader;
 
 it('test parser', function () {
     $acmiTxtPath = test_resource_path('simple-acmi.txt.acmi');
 
     $reader = new AcmiTextReader();
-    $parser = new AcmiParser($reader);
+    $parser = new AcmiParser($reader, AcmiParserFactory::defaultHandlers());
 
     $acmi = $parser->parseFromFile($acmiTxtPath);
 
@@ -20,6 +21,4 @@ it('test parser', function () {
     expect($acmi->referenceLatitude)->toBeFloat()->not->toBeNull();
     expect($acmi->referenceTime)->toBeInstanceOf(\DateTimeInterface::class)->not->toBeNull();
     expect($acmi->recordingTime)->toBeInstanceOf(\DateTimeInterface::class)->not->toBeNull();
-
-    dump($acmi->objects->first()->properties);
 });

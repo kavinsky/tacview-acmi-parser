@@ -1,19 +1,25 @@
 <?php
 
-namespace Kavinsky\TacviewAcmiReader\Reader;
+namespace Kavinsky\TacviewAcmiReader\Parser\Reader;
 
-use Kavinsky\TacviewAcmiReader\Reader\Exceptions\AccessErrorException;
 use ZipArchive;
+use Kavinsky\TacviewAcmiReader\Parser\Reader\Exceptions\AccessErrorException;
 
-class AcmiZipReader extends AbstractFileReader
+class AcmiZipReader extends AbstractStreamReader
 {
     protected ZipArchive $zipArchive;
 
+    /**
+     * {@inheritDoc}
+     */
     public function supports(string $filePath): bool
     {
         return str_ends_with($filePath, '.zip.acmi');
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public function start(string $filePath): void
     {
         if (! in_array('zip', stream_get_wrappers())) {
@@ -22,7 +28,7 @@ class AcmiZipReader extends AbstractFileReader
 
         $this->zipArchive = new ZipArchive();
 
-        if (! $archive = $this->zipArchive->open($filePath)) {
+        if (! $this->zipArchive->open($filePath)) {
             throw new \Exception($this->zipArchive->getStatusString());
         }
 

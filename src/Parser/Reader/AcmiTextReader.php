@@ -1,8 +1,8 @@
 <?php
 
-namespace Kavinsky\TacviewAcmiReader\Reader;
+namespace Kavinsky\TacviewAcmiReader\Parser\Reader;
 
-class AcmiTextReader extends AbstractFileReader
+class AcmiTextReader extends AbstractStreamReader
 {
     public function supports(string $filePath): bool
     {

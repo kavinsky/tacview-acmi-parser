@@ -3,15 +3,16 @@
 namespace Kavinsky\TacviewAcmiReader\Parser;
 
 use Kavinsky\TacviewAcmiReader\Acmi;
-use Kavinsky\TacviewAcmiReader\Parser\SentenceHandlers\EventHandler;
-use Kavinsky\TacviewAcmiReader\Parser\SentenceHandlers\FileHeadersHandler;
-use Kavinsky\TacviewAcmiReader\Parser\SentenceHandlers\GlobalPropertyHandler;
-use Kavinsky\TacviewAcmiReader\Parser\SentenceHandlers\ObjectHandler;
+use Kavinsky\TacviewAcmiReader\Parser\Reader\AcmiReaderInterface;
 use Kavinsky\TacviewAcmiReader\Parser\SentenceHandlers\SentenceHandlerInterface;
-use Kavinsky\TacviewAcmiReader\Reader\AcmiReaderInterface;
 
 class AcmiParser
 {
+    /**
+     * The registered Reader
+     *
+     * @var AcmiReaderInterface
+     */
     protected AcmiReaderInterface $reader;
 
     /**
@@ -35,22 +36,7 @@ class AcmiParser
     public function __construct(AcmiReaderInterface $reader, array $handlers = [])
     {
         $this->reader = $reader;
-        $this->handlers = count($handlers) > 0 ? $handlers : $this->getDefaultHandlers();
-    }
-
-    /**
-     * This are the default handlers to work with.
-     *
-     * @return FileHeadersHandler[]
-     */
-    protected function getDefaultHandlers(): array
-    {
-        return [
-            new ObjectHandler(),
-            new EventHandler(),
-            new GlobalPropertyHandler(),
-            new FileHeadersHandler(),
-        ];
+        $this->handlers = $handlers;
     }
 
     /**
@@ -63,7 +49,6 @@ class AcmiParser
 
         $this->acmi = new Acmi();
         $delta = 0.0;
-        $sentenceCount = 0;
         while (! $this->reader->eof()) {
             $sentence = $this->reader->nextSentence();
 
@@ -73,19 +58,26 @@ class AcmiParser
 
             if (str_starts_with($sentence, '#')) {
                 $delta = (float) substr($sentence, 1, strlen($sentence));
-
-                continue;
             }
 
-            foreach ($this->handlers as $handler) {
-                if ($handler->matches($sentence)) {
-                    $handler->handle($sentence, $this->acmi, $delta);
-                }
-            }
-
-            $sentenceCount++;
+            $this->runHandlers($sentence, $delta);
         }
 
         return $this->acmi;
+    }
+
+    /**
+     * Executes the registered handlers over the given sentence
+     *
+     * @param string|null $sentence The sentence to process by the handlers
+     * @param float $delta Delta in seconds from the mission referenceTime.
+     */
+    protected function runHandlers(?string $sentence, float $delta = 0): void
+    {
+        foreach ($this->handlers as $handler) {
+            if ($handler->matches($sentence)) {
+                $handler->handle($sentence, $this->acmi, $delta);
+            }
+        }
     }
 }
