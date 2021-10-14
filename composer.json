@@ -1,5 +1,5 @@
 {
-    "name": "kavinsky/tacview-acmi-reader",
+    "name": "kavinsky/tacview-acmi-parser",
     "description": "A PHP8 TacView ACMI file format reader",
     "keywords": [
         "kavinsky",
