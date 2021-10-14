@@ -1,11 +1,11 @@
 <?php
 
-namespace Kavinsky\TacviewAcmiReader\Parser\SentenceHandlers;
+namespace Kavinsky\TacviewAcmiParser\Parser\SentenceHandlers;
 
-use Kavinsky\TacviewAcmiReader\Acmi;
-use Kavinsky\TacviewAcmiReader\AcmiLogRecord;
-use Kavinsky\TacviewAcmiReader\AcmiObject;
-use Kavinsky\TacviewAcmiReader\AcmiPropertyBag;
+use Kavinsky\TacviewAcmiParser\Acmi;
+use Kavinsky\TacviewAcmiParser\AcmiLogRecord;
+use Kavinsky\TacviewAcmiParser\AcmiObject;
+use Kavinsky\TacviewAcmiParser\AcmiPropertyBag;
 
 class ObjectHandler implements SentenceHandlerInterface
 {

@@ -1,8 +1,8 @@
 <?php
 
-namespace Kavinsky\TacviewAcmiReader\Parser\Reader;
+namespace Kavinsky\TacviewAcmiParser\Parser\Reader;
 
-use Kavinsky\TacviewAcmiReader\Parser\Reader\Exceptions\AccessErrorException;
+use Kavinsky\TacviewAcmiParser\Parser\Reader\Exceptions\AccessErrorException;
 use ZipArchive;
 
 class AcmiZipReader extends AbstractStreamReader

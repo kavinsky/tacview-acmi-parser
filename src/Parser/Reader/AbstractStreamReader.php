@@ -1,9 +1,9 @@
 <?php
 
-namespace Kavinsky\TacviewAcmiReader\Parser\Reader;
+namespace Kavinsky\TacviewAcmiParser\Parser\Reader;
 
-use Kavinsky\TacviewAcmiReader\Parser\Reader\Exceptions\AccessErrorException;
-use Kavinsky\TacviewAcmiReader\Parser\Reader\Exceptions\EndOfFileException;
+use Kavinsky\TacviewAcmiParser\Parser\Reader\Exceptions\AccessErrorException;
+use Kavinsky\TacviewAcmiParser\Parser\Reader\Exceptions\EndOfFileException;
 
 abstract class AbstractStreamReader implements AcmiReaderInterface
 {

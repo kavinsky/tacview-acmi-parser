@@ -1,7 +1,7 @@
 <?php
 
-use Kavinsky\TacviewAcmiReader\Parser\Reader\AcmiTextReader;
-use Kavinsky\TacviewAcmiReader\Parser\Reader\Exceptions\AccessErrorException;
+use Kavinsky\TacviewAcmiParser\Parser\Reader\AcmiTextReader;
+use Kavinsky\TacviewAcmiParser\Parser\Reader\Exceptions\AccessErrorException;
 
 it('can read complete sentence with split lines', function () {
     $acmiTxtPath = test_resource_path('line-join-test.txt.acmi');

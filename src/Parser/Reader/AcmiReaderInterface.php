@@ -1,6 +1,6 @@
 <?php
 
-namespace Kavinsky\TacviewAcmiReader\Parser\Reader;
+namespace Kavinsky\TacviewAcmiParser\Parser\Reader;
 
 interface AcmiReaderInterface
 {

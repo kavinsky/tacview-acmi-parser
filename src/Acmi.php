@@ -1,11 +1,8 @@
 <?php
 
-namespace Kavinsky\TacviewAcmiReader;
+namespace Kavinsky\TacviewAcmiParser;
 
-use Carbon\Carbon;
 use Illuminate\Support\Collection;
-use Kavinsky\TacviewAcmiReader\Concern\AcmiEventsConcern;
-use Kavinsky\TacviewAcmiReader\Concern\AcmiGlobalPropertiesConcern;
 
 /**
  * The ACMI Report Object
@@ -14,30 +11,34 @@ use Kavinsky\TacviewAcmiReader\Concern\AcmiGlobalPropertiesConcern;
  */
 class Acmi
 {
-    use AcmiGlobalPropertiesConcern;
-    use AcmiEventsConcern;
+    /**
+     * Version of the TacView ACMI file format
+     *
+     * @var string|null
+     */
+    public ?string $version = null;
 
     /**
-     * @var Collection<AcmiObject>
+     * ACMI Global Properties
+     *
+     * @var AcmiGlobalProperties
+     */
+    public AcmiGlobalProperties $properties;
+
+    /**
+     * @var Collection
      */
     public Collection $objects;
 
+    /**
+     * @var Collection
+     */
+    public Collection $events;
+
     public function __construct()
     {
+        $this->properties = new AcmiGlobalProperties();
         $this->events = collect();
         $this->objects = collect();
-    }
-
-    /**
-     * A helper method to return a DateTimeInterface with added delta from referenceTime.
-     *
-     * @param  float|int  $delta
-     * @return Carbon
-     */
-    public function getPlusDelta(float|int $delta = 0): Carbon
-    {
-        return $this->referenceTime->clone()->addMicroseconds(
-            $delta * 1000
-        );
     }
 }

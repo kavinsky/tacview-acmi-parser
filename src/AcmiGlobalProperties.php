@@ -1,18 +1,11 @@
 <?php
 
-namespace Kavinsky\TacviewAcmiReader\Concern;
+namespace Kavinsky\TacviewAcmiParser;
 
 use Carbon\Carbon;
 
-trait AcmiGlobalPropertiesConcern
+class AcmiGlobalProperties
 {
-    /**
-     * Version of the TacView ACMI file format
-     *
-     * @var string|null
-     */
-    public ?string $version = null;
-
     /**
      * Base time (UTC) for the current mission. (In Game)
      *
@@ -99,4 +92,17 @@ trait AcmiGlobalPropertiesConcern
      * @var string|null
      */
     public ?string $comments = null;
+
+    /**
+     * A helper method to return a DateTimeInterface with added delta from referenceTime.
+     *
+     * @param  float|int  $delta
+     * @return Carbon
+     */
+    public function getPlusDelta(float|int $delta = 0): Carbon
+    {
+        return $this->referenceTime->clone()->addMicroseconds(
+            (int) $delta * 1000
+        );
+    }
 }

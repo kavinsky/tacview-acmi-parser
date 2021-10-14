@@ -1,8 +1,8 @@
 <?php
 
-namespace Kavinsky\TacviewAcmiReader\Parser\SentenceHandlers;
+namespace Kavinsky\TacviewAcmiParser\Parser\SentenceHandlers;
 
-use Kavinsky\TacviewAcmiReader\Acmi;
+use Kavinsky\TacviewAcmiParser\Acmi;
 
 class FileHeadersHandler implements SentenceHandlerInterface
 {

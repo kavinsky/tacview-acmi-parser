@@ -1,11 +1,11 @@
 <?php
 
-namespace Kavinsky\TacviewAcmiReader\Parser\SentenceHandlers;
+namespace Kavinsky\TacviewAcmiParser\Parser\SentenceHandlers;
 
 use Carbon\Carbon;
 use Carbon\Exceptions\InvalidFormatException;
 use Illuminate\Support\Str;
-use Kavinsky\TacviewAcmiReader\Acmi;
+use Kavinsky\TacviewAcmiParser\Acmi;
 
 class GlobalPropertyHandler implements SentenceHandlerInterface
 {
@@ -16,7 +16,7 @@ class GlobalPropertyHandler implements SentenceHandlerInterface
      */
     public function matches(string $sentence): bool
     {
-        return preg_match('/^0\,(\w*)\=(.*)/is', $sentence, $this->matches);
+        return preg_match('/^0\,(\w*)\=(.*)/is', $sentence, $this->matches) > 0;
     }
 
     /**
@@ -28,27 +28,29 @@ class GlobalPropertyHandler implements SentenceHandlerInterface
             return;
         }
 
-        [$sentence, $propertyKey, $value] = $this->matches;
+        [, $propertyKey, $value] = $this->matches;
         $propertyKey = Str::camel($propertyKey);
 
         try {
-            $acmiReflectionClass = new \ReflectionClass($acmi);
+            $acmiReflectionClass = new \ReflectionClass($acmi->properties);
             $acmiProperty = $acmiReflectionClass->getProperty($propertyKey);
 
             if ($this->isPropertyTypeScalar($acmiProperty->getType())) {
-                $value = match ($acmiProperty->getType()->getName()) {
-                    default => stripcslashes((string) $value),
-                    'float' => (float) $value,
-                    'int' => (int) $value,
-                };
+                if ($acmiProperty->getType() instanceof \ReflectionNamedType) {
+                    $value = match ($acmiProperty->getType()->getName()) {
+                        default => stripcslashes((string) $value),
+                        'float' => (float) $value,
+                        'int' => (int) $value,
+                    };
+                }
 
-                $acmi->{$propertyKey} = $value;
+                $this->setGlobalProperty($acmi, $propertyKey, $value);
 
                 return;
             }
 
             if ($this->isPropertyTypeDateTimeInterface($acmiProperty->getType())) {
-                $acmi->{$propertyKey} = $this->makeDate($value);
+                $this->setGlobalProperty($acmi, $propertyKey, $this->makeDate($value));
             }
         } catch (\ReflectionException $e) {
         }
@@ -106,5 +108,17 @@ class GlobalPropertyHandler implements SentenceHandlerInterface
         }
 
         return null;
+    }
+
+    /**
+     * Sets a ACMI Global Property by Key and Value
+     *
+     * @param  Acmi  $acmi
+     * @param  string  $key
+     * @param  mixed  $value
+     */
+    protected function setGlobalProperty(Acmi $acmi, string $key, mixed $value): void
+    {
+        $acmi->properties->{$key} = $value;
     }
 }

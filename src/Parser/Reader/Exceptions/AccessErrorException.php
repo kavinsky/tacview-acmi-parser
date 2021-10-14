@@ -1,6 +1,6 @@
 <?php
 
-namespace Kavinsky\TacviewAcmiReader\Parser\Reader\Exceptions;
+namespace Kavinsky\TacviewAcmiParser\Parser\Reader\Exceptions;
 
 class AccessErrorException extends \Exception
 {

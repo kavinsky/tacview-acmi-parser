@@ -29,7 +29,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Kavinsky\\TacviewAcmiReader\\": "src"
+            "Kavinsky\\TacviewAcmiParser\\": "src"
         }
     },
     "autoload-dev": {

@@ -1,26 +1,26 @@
 <?php
 
-namespace Kavinsky\TacviewAcmiReader\Parser;
+namespace Kavinsky\TacviewAcmiParser\Parser;
 
-use Kavinsky\TacviewAcmiReader\Acmi;
-use Kavinsky\TacviewAcmiReader\Parser\Reader\AcmiReaderInterface;
-use Kavinsky\TacviewAcmiReader\Parser\Reader\AcmiTextReader;
-use Kavinsky\TacviewAcmiReader\Parser\Reader\AcmiZipReader;
-use Kavinsky\TacviewAcmiReader\Parser\SentenceHandlers\EventHandler;
-use Kavinsky\TacviewAcmiReader\Parser\SentenceHandlers\FileHeadersHandler;
-use Kavinsky\TacviewAcmiReader\Parser\SentenceHandlers\GlobalPropertyHandler;
-use Kavinsky\TacviewAcmiReader\Parser\SentenceHandlers\ObjectHandler;
-use Kavinsky\TacviewAcmiReader\Parser\SentenceHandlers\SentenceHandlerInterface;
+use Kavinsky\TacviewAcmiParser\Acmi;
+use Kavinsky\TacviewAcmiParser\Parser\Reader\AcmiReaderInterface;
+use Kavinsky\TacviewAcmiParser\Parser\Reader\AcmiTextReader;
+use Kavinsky\TacviewAcmiParser\Parser\Reader\AcmiZipReader;
+use Kavinsky\TacviewAcmiParser\Parser\SentenceHandlers\EventHandler;
+use Kavinsky\TacviewAcmiParser\Parser\SentenceHandlers\FileHeadersHandler;
+use Kavinsky\TacviewAcmiParser\Parser\SentenceHandlers\GlobalPropertyHandler;
+use Kavinsky\TacviewAcmiParser\Parser\SentenceHandlers\ObjectHandler;
+use Kavinsky\TacviewAcmiParser\Parser\SentenceHandlers\SentenceHandlerInterface;
 
 class AcmiParserFactory
 {
     /**
-     * @var array<AcmiReaderInterface>
+     * @var AcmiReaderInterface[]
      */
     protected array $readers = [];
 
     /**
-     * @var array<SentenceHandlerInterface>
+     * @var SentenceHandlerInterface[]
      */
     protected ?array $handlers = null;
 
@@ -68,15 +68,15 @@ class AcmiParserFactory
     /**
      * This are the default handlers to work with.
      *
-     * @return FileHeadersHandler[]
+     * @return SentenceHandlerInterface[]
      */
     public static function defaultHandlers(): array
     {
         return [
+            new FileHeadersHandler(),
+            new GlobalPropertyHandler(),
             new ObjectHandler(),
             new EventHandler(),
-            new GlobalPropertyHandler(),
-            new FileHeadersHandler(),
         ];
     }
 

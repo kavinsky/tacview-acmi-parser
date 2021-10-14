@@ -1,10 +1,10 @@
 <?php
 
-namespace Kavinsky\TacviewAcmiReader\Parser;
+namespace Kavinsky\TacviewAcmiParser\Parser;
 
-use Kavinsky\TacviewAcmiReader\Acmi;
-use Kavinsky\TacviewAcmiReader\Parser\Reader\AcmiReaderInterface;
-use Kavinsky\TacviewAcmiReader\Parser\SentenceHandlers\SentenceHandlerInterface;
+use Kavinsky\TacviewAcmiParser\Acmi;
+use Kavinsky\TacviewAcmiParser\Parser\Reader\AcmiReaderInterface;
+use Kavinsky\TacviewAcmiParser\Parser\SentenceHandlers\SentenceHandlerInterface;
 
 class AcmiParser
 {

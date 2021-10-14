@@ -1,9 +1,9 @@
 <?php
 
-namespace Kavinsky\TacviewAcmiReader\Parser\SentenceHandlers;
+namespace Kavinsky\TacviewAcmiParser\Parser\SentenceHandlers;
 
-use Kavinsky\TacviewAcmiReader\Acmi;
-use Kavinsky\TacviewAcmiReader\AcmiEvent;
+use Kavinsky\TacviewAcmiParser\Acmi;
+use Kavinsky\TacviewAcmiParser\AcmiEvent;
 
 class EventHandler implements SentenceHandlerInterface
 {
@@ -14,7 +14,7 @@ class EventHandler implements SentenceHandlerInterface
      */
     public function matches(string $sentence): bool
     {
-        return preg_match('/^0\,Event\=(\w*)\|(.*)/is', $sentence, $this->matches);
+        return preg_match('/^0\,Event\=(\w*)\|(.*)/is', $sentence, $this->matches) > 0;
     }
 
     /**
@@ -22,8 +22,8 @@ class EventHandler implements SentenceHandlerInterface
      */
     public function handle(string $sentence, Acmi $acmi, float $delta = 0): void
     {
-        [$sentence, $eventName, $payload] = $this->matches;
-        $eventTime = $acmi->getPlusDelta($delta);
+        [, $eventName, $payload] = $this->matches;
+        $eventTime = $acmi->properties->getPlusDelta($delta);
 
         $acmi->events->add(new AcmiEvent(
             $eventTime,

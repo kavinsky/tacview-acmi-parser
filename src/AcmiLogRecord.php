@@ -1,6 +1,6 @@
 <?php
 
-namespace Kavinsky\TacviewAcmiReader;
+namespace Kavinsky\TacviewAcmiParser;
 
 class AcmiLogRecord
 {

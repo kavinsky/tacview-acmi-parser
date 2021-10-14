@@ -1,6 +1,6 @@
 <?php
 
-namespace Kavinsky\TacviewAcmiReader\Enum;
+namespace Kavinsky\TacviewAcmiParser\Enum;
 
 final class AcmiObjectType
 {
