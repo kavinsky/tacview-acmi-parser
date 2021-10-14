@@ -39,7 +39,6 @@ class AcmiParserFactory
         $this->setHandlers($handlers);
     }
 
-
     /**
      * @param string $filePath
      * @return Acmi
