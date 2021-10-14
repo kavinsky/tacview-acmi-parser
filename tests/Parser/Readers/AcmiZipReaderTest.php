@@ -6,8 +6,6 @@ use Kavinsky\TacviewAcmiReader\Parser\Reader\Exceptions\AccessErrorException;
 it('can read complete sentence with split lines', function () {
     $acmiTxtPath = test_resource_path('line-join-test.zip.acmi');
 
-    file_get_contents($acmiTxtPath);
-
     $reader = new AcmiZipReader();
     $reader->start($acmiTxtPath);
 
