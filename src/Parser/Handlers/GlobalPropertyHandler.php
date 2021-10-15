@@ -100,7 +100,7 @@ class GlobalPropertyHandler implements SentenceHandlerInterface
                 if ($date) {
                     return $date;
                 }
-            } catch (InvalidFormatException $e) {
+            } catch (\Exception $e) {
                 // no op
             }
         }
