@@ -5,7 +5,6 @@ namespace Kavinsky\TacviewAcmiParser\Parser\Handlers;
 use Carbon\Carbon;
 use Carbon\CarbonImmutable;
 use Carbon\CarbonInterface;
-use Carbon\Exceptions\InvalidFormatException;
 use Illuminate\Support\Str;
 use Kavinsky\TacviewAcmiParser\Acmi;
 use Kavinsky\TacviewAcmiParser\Enum\AcmiDateFormat;
