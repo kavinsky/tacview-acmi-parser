@@ -3,6 +3,13 @@
 use Kavinsky\TacviewAcmiParser\Parser\Reader\AcmiZipReader;
 use Kavinsky\TacviewAcmiParser\Parser\Reader\Exceptions\AccessErrorException;
 
+it('it matches for .txt.acmi file format', function () {
+    $acmiTxtPath = test_resource_path('line-join-test.zip.acmi');
+    $reader = new AcmiZipReader();
+
+    expect($reader->supports($acmiTxtPath))->toBeTrue();
+});
+
 it('can read complete sentence with split lines', function () {
     $acmiTxtPath = test_resource_path('line-join-test.zip.acmi');
 

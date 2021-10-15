@@ -2,10 +2,12 @@
 
 namespace Kavinsky\TacviewAcmiParser\Parser\Handlers;
 
+use Illuminate\Support\Str;
 use Kavinsky\TacviewAcmiParser\Acmi;
 use Kavinsky\TacviewAcmiParser\AcmiObject;
 use Kavinsky\TacviewAcmiParser\AcmiObjectRecord;
 use Kavinsky\TacviewAcmiParser\Collections\AcmiPropertyBag;
+use Kavinsky\TacviewAcmiParser\Enum\AcmiObjectType;
 
 class ObjectHandler implements SentenceHandlerInterface
 {
@@ -74,7 +76,11 @@ class ObjectHandler implements SentenceHandlerInterface
             9 => [$lon, $lat, $alt, $roll, $pitch, $yaw, $u, $v, $heading] = $rawTransform
         };
 
-        $propertyBag = new AcmiPropertyBag($this->parseProperties($payload));
+        $properties = $this->parseProperties($payload);
+        $propertyBag = new AcmiPropertyBag($properties);
+
+        $this->parseObjectTypeProperty($object, $properties);
+        $this->parseObjectProperties($object, $properties);
 
         $acmi->log->push(new AcmiObjectRecord(
             objectId: $object->id,
@@ -105,5 +111,37 @@ class ObjectHandler implements SentenceHandlerInterface
         }
 
         return new AcmiObject($id);
+    }
+
+    /**
+     * Parses the property Type for objects
+     *
+     * @param  AcmiObject  $object
+     * @param  array  $properties
+     */
+    protected function parseObjectTypeProperty(AcmiObject $object, array $properties): void
+    {
+        if (array_key_exists('Type', $properties)) {
+            $object->types->push(...AcmiObjectType::fromString($properties['Type']));
+        }
+    }
+
+    /**
+     * Parses the rest of the object properties
+     *
+     * @param  AcmiObject  $object
+     * @param  array  $properties
+     */
+    protected function parseObjectProperties(AcmiObject $object, array $properties): void
+    {
+        $familyProperties = ['Name', 'Parent', 'Next'];
+
+        foreach ($familyProperties as $expectKey) {
+            $camelCaseKey = Str::camel($expectKey);
+
+            if (array_key_exists($expectKey, $properties)) {
+                $object->{$camelCaseKey} = $properties[$expectKey];
+            }
+        }
     }
 }

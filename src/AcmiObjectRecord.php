@@ -92,11 +92,6 @@ class AcmiObjectRecord extends AcmiRecord
         $this->u = $u;
         $this->v = $v;
         $this->heading = $heading;
-
-        if (is_null($propertyBag)) {
-            $propertyBag = new AcmiPropertyBag();
-        }
-
         $this->properties = $propertyBag;
     }
 }

@@ -6,7 +6,7 @@ class AcmiTextReader extends AbstractStreamReader
 {
     public function supports(string $filePath): bool
     {
-        return str_ends_with($filePath, '.text.acmi');
+        return str_ends_with($filePath, '.txt.acmi');
     }
 
     public function start(string $filePath): void

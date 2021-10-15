@@ -21,4 +21,7 @@ it('test parser', function () {
     expect($acmi->properties->referenceLatitude)->toBeFloat()->not->toBeNull();
     expect($acmi->properties->referenceTime)->toBeInstanceOf(\DateTimeInterface::class)->not->toBeNull();
     expect($acmi->properties->recordingTime)->toBeInstanceOf(\DateTimeInterface::class)->not->toBeNull();
+
+    expect($acmi->log->count())->toBeGreaterThan(0);
+    expect($acmi->objects->count())->toBeGreaterThan(0);
 });

@@ -13,6 +13,8 @@ final class AcmiDateFormat extends Enum
     public const EXTENDED = 'Y-m-d\TH:i:s.u\Z';
 
     /**
+     *
+     * @codeCoverageIgnore
      * @return array<string>
      */
     public static function all(): array

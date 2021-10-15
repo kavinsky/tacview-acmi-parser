@@ -126,6 +126,7 @@ final class AcmiObjectType extends Enum
      * Returns the Object Types of Class Type category
      *
      * @see https://www.tacview.net/documentation/acmi/en/#:~:text=Tags-,Class,-Air
+     * @codeCoverageIgnore
      * @return array
      */
     public static function classTypes(): array
@@ -144,6 +145,7 @@ final class AcmiObjectType extends Enum
      * Returns the Object Types of Attribute Type category
      *
      * @see https://www.tacview.net/documentation/acmi/en/#:~:text=Misc-,Attributes,-Static
+     * @codeCoverageIgnore
      * @return array<AcmiObjectType>
      */
     public static function attributeTypes(): array
@@ -161,6 +163,7 @@ final class AcmiObjectType extends Enum
      * Returns the Object Types of Basic Type category
      *
      * @see https://www.tacview.net/documentation/acmi/en/#:~:text=Waypoint-,Specific%20Types,-Tank
+     * @codeCoverageIgnore
      * @return array<AcmiObjectType>
      */
     public static function basicTypes(): array
@@ -191,6 +194,7 @@ final class AcmiObjectType extends Enum
      *
      *
      * @see https://www.tacview.net/documentation/acmi/en/#:~:text=Waypoint-,Specific%20Types,-Tank
+     * @codeCoverageIgnore
      * @return array<AcmiObjectType>
      */
     public static function specificTypes(): array
