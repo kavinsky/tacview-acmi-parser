@@ -56,9 +56,7 @@ class AcmiParser
                 break;
             }
 
-            if (str_starts_with($sentence, '#')) {
-                $delta = (float) substr($sentence, 1, strlen($sentence));
-            }
+            $delta = $this->parseTimeframeChange($sentence, $delta);
 
             $this->runHandlers($sentence, $delta);
         }
@@ -79,5 +77,26 @@ class AcmiParser
                 $handler->handle($sentence, $this->acmi, $delta);
             }
         }
+    }
+
+    /**
+     * Parses for the #0.0 sentence to change the timeframe
+     *
+     * @param  string  $sentence
+     * @param  float  $delta
+     * @return float
+     * @throws \Exception
+     */
+    protected function parseTimeframeChange(string $sentence, float $delta = 0.0): float
+    {
+        if (str_starts_with($sentence, '#')) {
+            if ($this->acmi->properties->referenceTime === null) {
+                throw new \Exception('The ACMI Report is not correctly formated, no ReferenceTime set before #timestamp change.');
+            }
+
+            return (float) substr($sentence, 1, strlen($sentence));
+        }
+
+        return $delta;
     }
 }

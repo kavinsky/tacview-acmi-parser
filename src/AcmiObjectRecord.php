@@ -2,8 +2,18 @@
 
 namespace Kavinsky\TacviewAcmiParser;
 
-class AcmiLogRecord
+use Kavinsky\TacviewAcmiParser\Collections\AcmiPropertyBag;
+
+/**
+ * @psalm-immutable
+ */
+class AcmiObjectRecord extends AcmiRecord
 {
+    /**
+     * The ObjectId
+     */
+    public ?string $objectId;
+
     /**
      * Longitude in Degress
      */
@@ -60,6 +70,7 @@ class AcmiLogRecord
     public AcmiPropertyBag $properties;
 
     public function __construct(
+        ?string $objectId = null,
         ?float $lon = null,
         ?float $lat = null,
         ?float $alt = null,
@@ -71,6 +82,7 @@ class AcmiLogRecord
         ?float $heading = null,
         ?AcmiPropertyBag $propertyBag = null
     ) {
+        $this->objectId = $objectId;
         $this->longitude = $lon;
         $this->latitude = $lat;
         $this->altitude = $alt;

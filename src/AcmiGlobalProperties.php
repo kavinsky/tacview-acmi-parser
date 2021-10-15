@@ -2,7 +2,7 @@
 
 namespace Kavinsky\TacviewAcmiParser;
 
-use Carbon\Carbon;
+use Carbon\CarbonImmutable;
 
 class AcmiGlobalProperties
 {
@@ -12,16 +12,16 @@ class AcmiGlobalProperties
      * This time is combined with each frame offset (in seconds) to get the final
      * absolute UTC time for each data sample.
      *
-     * @var Carbon|null
+     * @var CarbonImmutable|null
      */
-    public ?Carbon $referenceTime = null;
+    public ?CarbonImmutable $referenceTime = null;
 
     /**
      * Recording (file) creation (UTC) time. (Real Time)
      *
-     * @var Carbon|null
+     * @var CarbonImmutable|null
      */
-    public ?Carbon $recordingTime = null;
+    public ?CarbonImmutable $recordingTime = null;
 
     /**
      * Mission/flight title or designation.
@@ -36,6 +36,13 @@ class AcmiGlobalProperties
      * @var string|null
      */
     public ?string $dataRecorder = null;
+
+    /**
+     * Source simulator, control station or file format.
+     *
+     * @var string|null
+     */
+    public ?string $dataSource = null;
 
     /**
      * Author or operator who has created this recording.
@@ -92,17 +99,4 @@ class AcmiGlobalProperties
      * @var string|null
      */
     public ?string $comments = null;
-
-    /**
-     * A helper method to return a DateTimeInterface with added delta from referenceTime.
-     *
-     * @param  float|int  $delta
-     * @return Carbon
-     */
-    public function getPlusDelta(float|int $delta = 0): Carbon
-    {
-        return $this->referenceTime->clone()->addMicroseconds(
-            (int) ($delta * 1000)
-        );
-    }
 }

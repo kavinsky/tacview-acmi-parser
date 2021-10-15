@@ -2,7 +2,12 @@
 
 namespace Kavinsky\TacviewAcmiParser\Enum;
 
-final class AcmiDateFormat
+use MabeEnum\Enum;
+
+/**
+ * @psalm-immutable
+ */
+final class AcmiDateFormat extends Enum
 {
     public const NORMAL = 'Y-m-d\TH:i:s\Z';
     public const EXTENDED = 'Y-m-d\TH:i:s.u\Z';
@@ -13,8 +18,8 @@ final class AcmiDateFormat
     public static function all(): array
     {
         return [
-            static::NORMAL,
-            static::EXTENDED,
+            AcmiDateFormat::NORMAL,
+            AcmiDateFormat::EXTENDED,
         ];
     }
 }

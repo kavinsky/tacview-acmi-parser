@@ -3,9 +3,9 @@
 namespace Kavinsky\TacviewAcmiParser\Parser\Handlers;
 
 use Kavinsky\TacviewAcmiParser\Acmi;
-use Kavinsky\TacviewAcmiParser\AcmiLogRecord;
 use Kavinsky\TacviewAcmiParser\AcmiObject;
-use Kavinsky\TacviewAcmiParser\AcmiPropertyBag;
+use Kavinsky\TacviewAcmiParser\AcmiObjectRecord;
+use Kavinsky\TacviewAcmiParser\Collections\AcmiPropertyBag;
 
 class ObjectHandler implements SentenceHandlerInterface
 {
@@ -35,9 +35,9 @@ class ObjectHandler implements SentenceHandlerInterface
         $payload = explode(',', $payload);
         $transformationVector = array_shift($payload);
 
-        $this->parseTransformation($object, $transformationVector, $payload);
+        $this->parseTransformation($acmi, $object, $transformationVector, $payload);
 
-        $acmi->objects[$hexId] = $object;
+        $acmi->objects->put($hexId, $object);
     }
 
     /**
@@ -64,7 +64,7 @@ class ObjectHandler implements SentenceHandlerInterface
      * @param  string  $transformString
      * @param  array<string>  $payload
      */
-    protected function parseTransformation(AcmiObject $object, string $transformString, array $payload = []): void
+    protected function parseTransformation(Acmi $acmi, AcmiObject $object, string $transformString, array $payload = []): void
     {
         $rawTransform = explode('|', $transformString);
         match (count($rawTransform)) {
@@ -76,9 +76,8 @@ class ObjectHandler implements SentenceHandlerInterface
 
         $propertyBag = new AcmiPropertyBag($this->parseProperties($payload));
 
-        $object->properties->merge($propertyBag);
-
-        $object->log->push(new AcmiLogRecord(
+        $acmi->log->push(new AcmiObjectRecord(
+            objectId: $object->id,
             lon: $lon ? (float) $lon : null,
             lat: $lat ? (float) $lat : null,
             alt: $alt ? (float) $alt : null,
@@ -105,6 +104,6 @@ class ObjectHandler implements SentenceHandlerInterface
             return $acmi->objects[$id];
         }
 
-        return new AcmiObject();
+        return new AcmiObject($id);
     }
 }

@@ -3,7 +3,7 @@
 namespace Kavinsky\TacviewAcmiParser\Parser\Handlers;
 
 use Kavinsky\TacviewAcmiParser\Acmi;
-use Kavinsky\TacviewAcmiParser\AcmiEvent;
+use Kavinsky\TacviewAcmiParser\AcmiEventRecord;
 
 class EventHandler implements SentenceHandlerInterface
 {
@@ -23,10 +23,10 @@ class EventHandler implements SentenceHandlerInterface
     public function handle(string $sentence, Acmi $acmi, float $delta = 0): void
     {
         [, $eventName, $payload] = $this->matches;
-        $eventTime = $acmi->properties->getPlusDelta($delta);
 
-        $acmi->events->add(new AcmiEvent(
-            $eventTime,
+        $acmi->log->add($this->makeRecord(
+            $acmi,
+            $delta,
             $eventName,
             $this->parsePayload($payload)
         ));
@@ -45,5 +45,19 @@ class EventHandler implements SentenceHandlerInterface
         return collect(explode('|', $payload))
             ->map(fn ($item) => explode(':', $item))
             ->toArray();
+    }
+
+    protected function makeRecord(Acmi $acmi, float $delta, string $name, array $payload = []): AcmiEventRecord
+    {
+        $timestamp = $acmi->properties->referenceTime
+            ->toMutable()
+            ->addMicroseconds((int) ($delta * 1000));
+
+        $record = new AcmiEventRecord();
+        $record->setTimeframe($timestamp->toImmutable());
+        $record->name = $name;
+        $record->properties = $payload;
+
+        return $record;
     }
 }

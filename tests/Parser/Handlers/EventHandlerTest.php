@@ -1,14 +1,14 @@
 <?php
 
-use Carbon\Carbon;
+use Carbon\CarbonImmutable;
 use Kavinsky\TacviewAcmiParser\Acmi;
-use Kavinsky\TacviewAcmiParser\AcmiEvent;
+use Kavinsky\TacviewAcmiParser\AcmiEventRecord;
 use Kavinsky\TacviewAcmiParser\Parser\Handlers\EventHandler;
 
 it('matches the sentence', function () {
     $sentence = '0,Event=EventType|09090909090|Here is a random text';
     $acmi = new Acmi();
-    $now = Carbon::now('UTC');
+    $now = CarbonImmutable::now('UTC');
     $acmi->properties->referenceTime = $now->clone();
     $delta = 9.9;
 
@@ -18,14 +18,14 @@ it('matches the sentence', function () {
 
     $handler->handle($sentence, $acmi, $delta);
 
-    expect($acmi->events->count())
+    expect($acmi->log->count())
         ->toBeGreaterThan(0);
 
-    /** @var AcmiEvent $event */
-    expect($event = $acmi->events->first())
+    /** @var AcmiEventRecord $event */
+    expect($event = $acmi->log->first())
         ->not->toBeNull();
 
-    expect($event->time->diffInMicroseconds($now->addMicroseconds(9900)))
+    expect($event->timestamp()->diffInMicroseconds($now->addMicroseconds(9900)))
         ->toBe(0);
 });
 

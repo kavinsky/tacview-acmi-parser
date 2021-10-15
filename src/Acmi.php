@@ -3,6 +3,8 @@
 namespace Kavinsky\TacviewAcmiParser;
 
 use Illuminate\Support\Collection;
+use Kavinsky\TacviewAcmiParser\Collections\AcmiLogCollection;
+use Kavinsky\TacviewAcmiParser\Collections\AcmiObjectCollection;
 
 /**
  * The ACMI Report Object
@@ -31,14 +33,14 @@ class Acmi
     public Collection $objects;
 
     /**
-     * @var Collection
+     * @var AcmiLogCollection
      */
-    public Collection $events;
+    public AcmiLogCollection $log;
 
     public function __construct()
     {
         $this->properties = new AcmiGlobalProperties();
-        $this->events = collect();
-        $this->objects = collect();
+        $this->objects = new AcmiObjectCollection();
+        $this->log = new AcmiLogCollection();
     }
 }

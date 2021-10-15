@@ -3,6 +3,8 @@
 namespace Kavinsky\TacviewAcmiParser\Parser\Handlers;
 
 use Carbon\Carbon;
+use Carbon\CarbonImmutable;
+use Carbon\CarbonInterface;
 use Carbon\Exceptions\InvalidFormatException;
 use Illuminate\Support\Str;
 use Kavinsky\TacviewAcmiParser\Acmi;
@@ -76,20 +78,20 @@ class GlobalPropertyHandler implements SentenceHandlerInterface
      */
     private function isPropertyTypeDateTimeInterface(\ReflectionUnionType|\ReflectionNamedType|null $type): bool
     {
-        return in_array($type?->getName(), [\DateTimeInterface::class, Carbon::class]);
+        return in_array($type?->getName(), [CarbonImmutable::class]);
     }
 
     /**
      * Creates a Carbon Date parsing from posible formats
      *
      * @param  string  $value
-     * @return Carbon|null
+     * @return CarbonInterface|null
      */
-    private function makeDate(string $value): ?Carbon
+    private function makeDate(string $value): ?CarbonInterface
     {
         foreach (AcmiDateFormat::all() as $format) {
             try {
-                $date = Carbon::createFromFormat(
+                $date = CarbonImmutable::createFromFormat(
                     $format,
                     $value,
                     new \DateTimeZone('UTC')

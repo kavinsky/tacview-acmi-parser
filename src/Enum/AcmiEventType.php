@@ -2,9 +2,11 @@
 
 namespace Kavinsky\TacviewAcmiParser\Enum;
 
+use MabeEnum\Enum;
+
 /**
  * @psalm-immutable
  */
-class AcmiGlobalProperties
+final class AcmiEventType extends Enum
 {
 }
