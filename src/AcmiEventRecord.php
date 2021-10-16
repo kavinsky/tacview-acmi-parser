@@ -13,4 +13,17 @@ class AcmiEventRecord extends AcmiRecord
      * @var array
      */
     public array $properties;
+
+    /**
+     * Get the instance as an array.
+     *
+     * @return array
+     */
+    public function toArray(): array
+    {
+        return parent::toRecordArray([
+            'name' => $this->name,
+            'properties' => $this->properties,
+        ]);
+    }
 }

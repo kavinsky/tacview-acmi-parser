@@ -99,4 +99,22 @@ class AcmiGlobalProperties
      * @var string|null
      */
     public ?string $comments = null;
+
+    public function toArray(): array
+    {
+        return [
+            'referenceTime' => $this->referenceTime?->toIso8601ZuluString(),
+            'recordingTime' => $this->recordingTime?->toIso8601ZuluString(),
+            'title' => $this->title,
+            'dataRecorder' => $this->dataRecorder,
+            'dataSource' => $this->dataSource,
+            'author' => $this->author,
+            'referenceLongitude' => $this->referenceLongitude,
+            'referenceLatitude' => $this->referenceLatitude,
+            'category' => $this->category,
+            'briefing' => $this->briefing,
+            'debriefing' => $this->debriefing,
+            'comments' => $this->comments,
+        ];
+    }
 }

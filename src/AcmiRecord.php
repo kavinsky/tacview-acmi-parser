@@ -3,8 +3,9 @@
 namespace Kavinsky\TacviewAcmiParser;
 
 use Carbon\CarbonImmutable;
+use Illuminate\Contracts\Support\Arrayable;
 
-abstract class AcmiRecord
+abstract class AcmiRecord implements Arrayable
 {
     /**
      * @var CarbonImmutable
@@ -27,5 +28,18 @@ abstract class AcmiRecord
     public function timestamp(): CarbonImmutable
     {
         return $this->timestamp;
+    }
+
+    /**
+     *
+     * @psalm-mutation-free
+     * @return array
+     */
+    protected function toRecordArray(array $properties = []): array
+    {
+        return [
+            'recordType' => self::class,
+            'properties' => $properties,
+        ];
     }
 }

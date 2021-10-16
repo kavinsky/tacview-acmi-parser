@@ -6,15 +6,12 @@ use Illuminate\Support\Collection;
 use Kavinsky\TacviewAcmiParser\AcmiObject;
 use Kavinsky\TacviewAcmiParser\Enum\AcmiObjectType;
 
+/**
+ * @psalm-template TKey string
+ * @psalm-template TValue AcmiObject
+ */
 class AcmiObjectCollection extends Collection
 {
-    /**
-     * The items contained in the collection.
-     *
-     * @var array<AcmiObject>
-     */
-    protected $items = [];
-
     /**
      * Filter the objects by the given Type
      *

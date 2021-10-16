@@ -5,7 +5,7 @@ namespace Kavinsky\TacviewAcmiParser;
 use Kavinsky\TacviewAcmiParser\Collections\AcmiPropertyBag;
 
 /**
- * @psalm-immutable
+ *
  */
 class AcmiObjectRecord extends AcmiRecord
 {
@@ -93,5 +93,27 @@ class AcmiObjectRecord extends AcmiRecord
         $this->v = $v;
         $this->heading = $heading;
         $this->properties = $propertyBag;
+    }
+
+    /**
+     * Get the instance as an array.
+     *
+     * @return array
+     */
+    public function toArray(): array
+    {
+        return parent::toRecordArray([
+            'objectId' => $this->objectId,
+            'lon' => $this->longitude,
+            'lat' => $this->latitude,
+            'alt' => $this->altitude,
+            'roll' => $this->roll,
+            'pitch' => $this->pitch,
+            'yaw' => $this->yaw,
+            'u' => $this->u,
+            'v' => $this->v,
+            'hdg' => $this->heading,
+            'properties' => $this->properties->toArray(),
+        ]);
     }
 }
